@@ -3,133 +3,444 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>币圈合约助手</title>
+    <title>币圈合约助手 - 专业可信赖的交易伙伴</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            /* 高端色彩系统 */
+            --primary-gradient: linear-gradient(135deg, #1a365d 0%, #553c9a 100%);
+            --secondary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --accent-color: #f6ad55;
+            --success-color: #48bb78;
+            --danger-color: #f56565;
+            --warning-color: #ed8936;
+            
+            /* 背景系统 */
+            --bg-primary: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+            --bg-card: rgba(255, 255, 255, 0.95);
+            --bg-glass: rgba(255, 255, 255, 0.1);
+            
+            /* 文字颜色 */
+            --text-primary: #2d3748;
+            --text-secondary: #4a5568;
+            --text-muted: #718096;
+            --text-light: #a0aec0;
+            
+            /* 阴影系统 */
+            --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.02), 0 1px 2px rgba(0, 0, 0, 0.04);
+            --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.04), 0 2px 4px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.06), 0 4px 8px rgba(0, 0, 0, 0.08);
+            --shadow-xl: 0 12px 24px rgba(0, 0, 0, 0.08), 0 6px 12px rgba(0, 0, 0, 0.1);
+            
+            /* 间距系统 */
+            --space-xs: 0.5rem;
+            --space-sm: 0.75rem;
+            --space-md: 1rem;
+            --space-lg: 1.5rem;
+            --space-xl: 2rem;
+            --space-2xl: 3rem;
+            
+            /* 圆角系统 */
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-xl: 20px;
+        }
+        
+        * {
+            box-sizing: border-box;
+        }
+        
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            background-color: #f0f2f5; /* 仿iOS浅色背景 */
-            color: #1c1c1e; /* 仿iOS深色文字 */
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            margin: 0;
+            padding: 0;
+            padding-bottom: 100px;
+            line-height: 1.6;
+            font-weight: 400;
         }
-        .ios-header {
-            background-color: #f8f8f8; /* 仿iOS导航栏颜色 */
-            border-bottom: 1px solid #d1d1d6; /* 仿iOS导航栏底部分割线 */
-            padding: 12px 16px;
+        
+        .premium-header {
+            background: var(--primary-gradient);
+            padding: var(--space-lg) var(--space-lg) var(--space-2xl);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .premium-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="%23ffffff" opacity="0.03"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>') repeat;
+            pointer-events: none;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 2;
             text-align: center;
-            font-size: 1.125rem; /* 18px */
-            font-weight: 600;
-            color: #000;
+            color: white;
         }
-        .grid-container {
+        
+        .app-logo {
+            width: 64px;
+            height: 64px;
+            background: var(--bg-glass);
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto var(--space-md);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .app-logo i {
+            font-size: 2rem;
+            color: var(--accent-color);
+        }
+        
+        .app-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: var(--space-xs);
+            letter-spacing: -0.025em;
+        }
+        
+        .app-subtitle {
+            font-size: 1rem;
+            opacity: 0.9;
+            font-weight: 400;
+            margin-bottom: var(--space-lg);
+        }
+        
+        .trust-indicators {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-lg);
+            margin-top: var(--space-lg);
+        }
+        
+        .trust-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+            font-size: 0.875rem;
+            opacity: 0.9;
+        }
+        
+        .trust-item i {
+            color: var(--accent-color);
+        }
+        
+        .main-content {
+            padding: var(--space-xl) var(--space-lg);
+            margin-top: -40px;
+            position: relative;
+            z-index: 3;
+        }
+        
+        .features-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 16px;
-            padding: 16px;
+            gap: var(--space-lg);
+            margin-bottom: var(--space-2xl);
         }
-        .card {
-            background-color: #ffffff; /* 白色卡片 */
-            border-radius: 12px; /* iOS风格圆角 */
-            padding: 20px;
+        
+        .feature-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
             text-align: center;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* 轻微阴影 */
-            transition: transform 0.2s ease-in-out;
             text-decoration: none;
-            color: inherit; /* 继承文字颜色 */
+            color: var(--text-primary);
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
-        .card:hover {
-            transform: translateY(-4px); /* 悬浮效果 */
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--secondary-gradient);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
         }
-        .card i {
-            font-size: 2.5rem; /* 40px */
-            margin-bottom: 12px;
-            color: #007aff; /* iOS 主题蓝色 */
+        
+        .feature-card:hover::before {
+            transform: scaleX(1);
         }
-        .card-title {
-            font-size: 1rem; /* 16px */
-            font-weight: 500;
-            color: #1c1c1e;
+        
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
         }
-        .ios-tab-bar {
+        
+        .feature-icon {
+            width: 56px;
+            height: 56px;
+            background: var(--secondary-gradient);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto var(--space-md);
+            position: relative;
+        }
+        
+        .feature-icon::after {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            background: var(--secondary-gradient);
+            border-radius: var(--radius-md);
+            z-index: -1;
+            opacity: 0.2;
+            filter: blur(8px);
+        }
+        
+        .feature-icon i {
+            font-size: 1.5rem;
+            color: white;
+        }
+        
+        .feature-title {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: var(--space-xs);
+            color: var(--text-primary);
+        }
+        
+        .feature-desc {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+        
+        .premium-tab-bar {
             position: fixed;
             bottom: 0;
             left: 0;
             right: 0;
-            background-color: #f8f8f8;
-            border-top: 1px solid #d1d1d6;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
             display: flex;
             justify-content: space-around;
-            padding: 8px 0;
-            padding-bottom: calc(8px + env(safe-area-inset-bottom)); /* 适配iPhone X等底部安全区域 */
+            padding: var(--space-md) 0;
+            padding-bottom: calc(var(--space-md) + env(safe-area-inset-bottom));
+            box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.04);
         }
+        
         .tab-item {
             display: flex;
             flex-direction: column;
             align-items: center;
-            color: #8e8e93; /* iOS未选中标签颜色 */
+            color: var(--text-muted);
             text-decoration: none;
-            font-size: 0.75rem; /* 12px */
+            font-size: 0.75rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            padding: var(--space-xs);
+            border-radius: var(--radius-sm);
+            min-width: 60px;
         }
+        
         .tab-item.active {
-            color: #007aff; /* iOS选中标签颜色 */
+            color: var(--text-primary);
+            background: rgba(102, 126, 234, 0.1);
         }
+        
         .tab-item i {
-            font-size: 1.5rem; /* 24px */
-            margin-bottom: 2px;
+            font-size: 1.25rem;
+            margin-bottom: 4px;
+            transition: transform 0.2s ease;
         }
+        
+        .tab-item.active i {
+            transform: scale(1.1);
+            background: var(--secondary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 480px) {
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: var(--space-md);
+            }
+            
+            .feature-card {
+                padding: var(--space-lg);
+            }
+            
+            .app-title {
+                font-size: 1.5rem;
+            }
+            
+            .trust-indicators {
+                flex-direction: column;
+                gap: var(--space-sm);
+            }
+        }
+        
+        /* 动画效果 */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .feature-card {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+        
+        .feature-card:nth-child(1) { animation-delay: 0.1s; }
+        .feature-card:nth-child(2) { animation-delay: 0.2s; }
+        .feature-card:nth-child(3) { animation-delay: 0.3s; }
+        .feature-card:nth-child(4) { animation-delay: 0.4s; }
+        .feature-card:nth-child(5) { animation-delay: 0.5s; }
+        .feature-card:nth-child(6) { animation-delay: 0.6s; }
     </style>
 </head>
-<body class="pb-20">
+<body>
+    <!-- 高端渐变头部 -->
+    <div class="premium-header">
+        <div class="header-content">
+            <div class="app-logo">
+                <i class="fas fa-chart-line"></i>
+            </div>
+            <h1 class="app-title">币圈合约助手</h1>
+            <p class="app-subtitle">专业可信赖的交易伙伴</p>
+            
+            <div class="trust-indicators">
+                <div class="trust-item">
+                    <i class="fas fa-shield-check"></i>
+                    <span>安全保障</span>
+                </div>
+                <div class="trust-item">
+                    <i class="fas fa-award"></i>
+                    <span>专业认证</span>
+                </div>
+                <div class="trust-item">
+                    <i class="fas fa-clock"></i>
+                    <span>7×24服务</span>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <header class="ios-header">
-        币圈合约助手
-    </header>
+    <!-- 主功能区域 -->
+    <div class="main-content">
+        <div class="features-grid">
+            <!-- 合约保跟单 -->
+            <a href="insurance.html" class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <div class="feature-title">合约保跟单</div>
+                <div class="feature-desc">亏损赔付保障服务</div>
+            </a>
+            <!-- 策略分享 -->
+            <a href="strategy.html" class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <div class="feature-title">策略分享</div>
+                <div class="feature-desc">专业交易策略分析</div>
+            </a>
 
-    <main class="grid-container">
-        <a href="strategy.html" class="card">
-            <i class="fas fa-chart-line"></i>
-            <div class="card-title">策略分享</div>
-        </a>
-        <a href="advice.html" class="card">
-            <i class="fas fa-robot"></i>
-            <div class="card-title">开仓建议</div>
-        </a>
-        <a href="analysis.html" class="card">
-            <i class="fas fa-newspaper"></i>
-            <div class="card-title">早盘分析</div>
-        </a>
-        <a href="monitoring.html" class="card">
-            <i class="fas fa-search-dollar"></i>
-            <div class="card-title">数据监控</div>
-        </a>
-        <a href="support.html" class="card">
-            <i class="fas fa-book-open"></i>
-            <div class="card-title">技术支持</div>
-        </a>
-        <a href="kol.html" class="card">
-            <i class="fas fa-users"></i>
-            <div class="card-title">KOL合集</div>
-        </a>
-    </main>
+            <!-- 开仓建议 -->
+            <a href="advice.html" class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-lightbulb"></i>
+                </div>
+                <div class="feature-title">开仓建议</div>
+                <div class="feature-desc">智能开仓时机提醒</div>
+            </a>
 
-    <nav class="ios-tab-bar">
+            <!-- 早盘分析 -->
+            <a href="analysis.html" class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-newspaper"></i>
+                </div>
+                <div class="feature-title">早盘分析</div>
+                <div class="feature-desc">每日市场深度解读</div>
+            </a>
+
+            <!-- 数据监控 -->
+            <a href="monitoring.html" class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-chart-bar"></i>
+                </div>
+                <div class="feature-title">数据监控</div>
+                <div class="feature-desc">实时行情数据追踪</div>
+            </a>
+
+            <!-- 技术支持 -->
+            <a href="support.html" class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-headset"></i>
+                </div>
+                <div class="feature-title">技术支持</div>
+                <div class="feature-desc">专业客服在线答疑</div>
+            </a>
+
+            <!-- KOL合集 -->
+            <a href="kol.html" class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="feature-title">KOL合集</div>
+                <div class="feature-desc">顶级分析师观点</div>
+            </a>
+        </div>
+    </div>
+
+    <!-- 高端底部导航栏 -->
+    <div class="premium-tab-bar">
         <a href="index.html" class="tab-item active">
             <i class="fas fa-home"></i>
-            <span>首页</span>
+            首页
         </a>
         <a href="strategy.html" class="tab-item">
             <i class="fas fa-chart-line"></i>
-            <span>策略</span>
+            策略
         </a>
         <a href="monitoring.html" class="tab-item">
-            <i class="fas fa-search-dollar"></i>
-            <span>监控</span>
+            <i class="fas fa-chart-bar"></i>
+            监控
+        </a>
+        <a href="insurance.html" class="tab-item">
+            <i class="fas fa-shield-alt"></i>
+            保险
         </a>
         <a href="profile.html" class="tab-item">
-            <i class="fas fa-user-circle"></i>
-            <span>我的</span>
+            <i class="fas fa-user"></i>
+            我的
         </a>
-    </nav>
+    </div>
 
 </body>
-</html> 
+</html>

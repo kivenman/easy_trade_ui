@@ -7,232 +7,559 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
+        /* 高端设计系统 */
+        :root {
+            /* 色彩系统 */
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --success-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --warning-gradient: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            --danger-gradient: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            
+            /* 中性色 */
+            --bg-primary: #0a0e1a;
+            --bg-secondary: #1a1f2e;
+            --bg-card: rgba(255, 255, 255, 0.05);
+            --text-primary: #ffffff;
+            --text-secondary: #a0a9c0;
+            --text-muted: #6b7280;
+            --border-color: rgba(255, 255, 255, 0.1);
+            
+            /* 阴影系统 */
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.15);
+            --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.2);
+            --shadow-glow: 0 0 20px rgba(102, 126, 234, 0.3);
+            
+            /* 间距系统 */
+            --space-xs: 0.5rem;
+            --space-sm: 0.75rem;
+            --space-md: 1rem;
+            --space-lg: 1.5rem;
+            --space-xl: 2rem;
+            --space-2xl: 3rem;
+            
+            /* 圆角系统 */
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-xl: 20px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            background-color: #f0f2f5;
-            color: #1c1c1e;
-            padding-bottom: 80px; /* 为底部导航栏预留空间 */
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            padding-bottom: 100px;
         }
-        .ios-header {
-            background-color: #f8f8f8;
-            border-bottom: 1px solid #d1d1d6;
-            padding: 12px 16px;
+        
+        /* 高端头部 */
+        .premium-header {
+            background: var(--primary-gradient);
+            padding: var(--space-lg) var(--space-md);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .premium-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="%23ffffff" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>') repeat;
+            pointer-events: none;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 1;
             display: flex;
             align-items: center;
-            font-size: 1.125rem; /* 18px */
-            font-weight: 600;
-            color: #000;
+            justify-content: space-between;
         }
-        .ios-header .back-button {
-            color: #007aff;
+        
+        .back-button {
+            color: rgba(255, 255, 255, 0.9);
             text-decoration: none;
-            font-size: 1rem; /* 16px */
-            margin-right: 8px;
-        }
-        .ios-header .title {
-            flex-grow: 1;
-            text-align: center;
-            margin-left: -24px; /* 大致抵消返回按钮的宽度，使标题居中 */
-        }
-        .strategy-card {
-            background-color: #ffffff;
-            border-radius: 10px;
-            margin: 16px;
-            padding: 16px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-        }
-        .strategy-card .header {
+            font-size: 1rem;
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            margin-bottom: 12px;
+            gap: var(--space-xs);
+            padding: var(--space-xs) var(--space-sm);
+            border-radius: var(--radius-sm);
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
         }
-        .strategy-card .title {
-            font-size: 1.1rem; /* 约17.6px */
-            font-weight: 600;
+        
+        .back-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateX(-2px);
         }
-        .strategy-card .time {
-            font-size: 0.8rem; /* 约12.8px */
-            color: #8e8e93;
+        
+        .header-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
         }
-        .strategy-card .content {
-            font-size: 0.95rem; /* 约15.2px */
-            line-height: 1.5;
-            color: #3c3c43;
-            margin-bottom: 12px;
+        
+        .header-actions {
+            display: flex;
+            gap: var(--space-sm);
         }
-        .strategy-card .details {
+        
+        .action-button {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-md);
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: none;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .action-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.05);
+        }
+        
+        /* 过滤器栏 */
+        .filter-section {
+            background: var(--bg-secondary);
+            padding: var(--space-md);
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .filter-bar {
+            display: flex;
+            gap: var(--space-sm);
+            overflow-x: auto;
+            padding-bottom: var(--space-xs);
+        }
+        
+        .filter-button {
+            padding: var(--space-sm) var(--space-lg);
+            border-radius: var(--radius-xl);
+            font-size: 0.9rem;
+            font-weight: 500;
+            border: 1px solid var(--border-color);
+            background: transparent;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .filter-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--primary-gradient);
+            transition: left 0.3s ease;
+            z-index: -1;
+        }
+        
+        .filter-button.active {
+            color: white;
+            border-color: transparent;
+            box-shadow: var(--shadow-glow);
+        }
+        
+        .filter-button.active::before {
+            left: 0;
+        }
+        
+        .filter-button:hover:not(.active) {
+            background: rgba(102, 126, 234, 0.1);
+            border-color: rgba(102, 126, 234, 0.3);
+        }
+        
+        /* 策略卡片 */
+        .strategy-list {
+            padding: var(--space-md);
+        }
+        
+        .strategy-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+            margin-bottom: var(--space-lg);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .strategy-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--primary-gradient);
+        }
+        
+        .strategy-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+            border-color: rgba(102, 126, 234, 0.3);
+        }
+        
+        .card-header {
             display: flex;
             justify-content: space-between;
-            font-size: 0.85rem; /* 约13.6px */
-            color: #6c6c70;
+            align-items: flex-start;
+            margin-bottom: var(--space-md);
         }
-        .strategy-card .tags span {
-            background-color: #eef7ff;
-            color: #007aff;
-            padding: 4px 8px;
-            border-radius: 6px;
-            font-size: 0.75rem; /* 12px */
-            margin-right: 6px;
+        
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: var(--space-xs);
         }
-        .ios-tab-bar {
+        
+        .card-time {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            background: rgba(255, 255, 255, 0.05);
+            padding: var(--space-xs) var(--space-sm);
+            border-radius: var(--radius-sm);
+        }
+        
+        .card-content {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: var(--text-secondary);
+            margin-bottom: var(--space-md);
+        }
+        
+        .card-details {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: var(--space-md);
+            padding: var(--space-sm);
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: var(--radius-sm);
+            font-size: 0.85rem;
+        }
+        
+        .detail-item {
+            color: var(--text-secondary);
+        }
+        
+        .card-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-xs);
+        }
+        
+        .tag {
+            padding: var(--space-xs) var(--space-sm);
+            border-radius: var(--radius-sm);
+            font-size: 0.75rem;
+            font-weight: 500;
+            background: rgba(102, 126, 234, 0.1);
+            color: #667eea;
+            border: 1px solid rgba(102, 126, 234, 0.2);
+        }
+        
+        .tag.long {
+            background: rgba(67, 233, 123, 0.1);
+            color: #43e97b;
+            border-color: rgba(67, 233, 123, 0.2);
+        }
+        
+        .tag.short {
+            background: rgba(250, 112, 154, 0.1);
+            color: #fa709a;
+            border-color: rgba(250, 112, 154, 0.2);
+        }
+        
+        /* 高端底部导航栏 */
+        .premium-tab-bar {
             position: fixed;
             bottom: 0;
             left: 0;
             right: 0;
-            background-color: #f8f8f8;
-            border-top: 1px solid #d1d1d6;
+            background: var(--bg-secondary);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid var(--border-color);
             display: flex;
             justify-content: space-around;
-            padding: 8px 0;
-            padding-bottom: calc(8px + env(safe-area-inset-bottom));
+            padding: var(--space-sm) 0;
+            padding-bottom: calc(var(--space-sm) + env(safe-area-inset-bottom));
         }
+        
         .tab-item {
             display: flex;
             flex-direction: column;
             align-items: center;
-            color: #8e8e93;
+            color: var(--text-muted);
             text-decoration: none;
             font-size: 0.75rem;
+            font-weight: 500;
+            padding: var(--space-xs);
+            border-radius: var(--radius-sm);
+            transition: all 0.3s ease;
+            position: relative;
         }
-        .tab-item.active {
-            color: #007aff;
-        }
+        
         .tab-item i {
-            font-size: 1.5rem;
-            margin-bottom: 2px;
+            font-size: 1.2rem;
+            margin-bottom: var(--space-xs);
+            transition: all 0.3s ease;
         }
-        .filter-bar {
-            display: flex;
-            justify-content: space-around;
-            padding: 10px 16px;
-            background-color: #ffffff;
-            border-bottom: 1px solid #e5e5ea;
+        
+        .tab-item.active {
+            color: #667eea;
         }
-        .filter-button {
-            padding: 6px 12px;
-            border-radius: 15px;
-            font-size: 0.9rem;
-            color: #007aff;
-            background-color: #f0f2f5;
-            border: 1px solid transparent;
+        
+        .tab-item.active i {
+            transform: scale(1.1);
         }
-        .filter-button.active {
-            background-color: #007aff;
-            color: white;
-            border-color: #007aff;
+        
+        .tab-item:hover:not(.active) {
+            color: var(--text-secondary);
+            background: rgba(255, 255, 255, 0.05);
         }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .premium-header {
+                padding: var(--space-md) var(--space-sm);
+            }
+            
+            .header-title {
+                font-size: 1.25rem;
+            }
+            
+            .strategy-list {
+                padding: var(--space-sm);
+            }
+            
+            .strategy-card {
+                padding: var(--space-md);
+            }
+        }
+        
+        /* 动画效果 */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .strategy-card {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+        
+        .strategy-card:nth-child(2) { animation-delay: 0.1s; }
+        .strategy-card:nth-child(3) { animation-delay: 0.2s; }
+        .strategy-card:nth-child(4) { animation-delay: 0.3s; }
+        .strategy-card:nth-child(5) { animation-delay: 0.4s; }
     </style>
 </head>
 <body>
-
-    <header class="ios-header">
-        <a href="index.html" class="back-button"><i class="fas fa-chevron-left"></i> 返回</a>
-        <span class="title">策略分享</span>
-    </header>
-
-    <div class="filter-bar">
-        <button class="filter-button active" onclick="filterStrategies('all')">全部</button>
-        <button class="filter-button" onclick="filterStrategies('long')">做多</button>
-        <button class="filter-button" onclick="filterStrategies('short')">做空</button>
-        <button class="filter-button" onclick="filterStrategies('volatile')">震荡</button>
+    <!-- 高端渐变头部 -->
+    <div class="premium-header">
+        <div class="header-content">
+            <a href="index.html" class="back-button">
+                <i class="fas fa-chevron-left"></i>
+                返回
+            </a>
+            <div class="header-title">策略分享</div>
+            <div class="header-actions">
+                <button class="action-button">
+                    <i class="fas fa-search"></i>
+                </button>
+                <button class="action-button">
+                    <i class="fas fa-filter"></i>
+                </button>
+            </div>
+        </div>
     </div>
 
-    <div id="strategy-list">
+    <!-- 过滤器栏 -->
+    <div class="filter-section">
+        <div class="filter-bar">
+            <button class="filter-button active" onclick="filterStrategies('all')">全部</button>
+            <button class="filter-button" onclick="filterStrategies('long')">做多</button>
+            <button class="filter-button" onclick="filterStrategies('short')">做空</button>
+            <button class="filter-button" onclick="filterStrategies('volatile')">震荡</button>
+            <button class="filter-button" onclick="filterStrategies('scalping')">短线</button>
+        </div>
+    </div>
+
+    <!-- 策略列表 -->
+    <div class="strategy-list" id="strategy-list">
         <div class="strategy-card" data-type="long">
-            <div class="header">
-                <span class="title">BTCUSDT - 看涨突破</span>
-                <span class="time">15分钟前</span>
+            <div class="card-header">
+                <div>
+                    <div class="card-title">BTCUSDT - 看涨突破</div>
+                    <div class="card-time">15分钟前</div>
+                </div>
+                <div class="card-time">🔥 热门</div>
             </div>
-            <p class="content">
-                当前价格突破关键阻力位 68000，预计进一步上涨至 70000。建议在回调至 67800 附近入场。
-            </p>
-            <div class="details">
-                <span>止损: 67000</span>
-                <span>止盈: 70000 / 72000</span>
+            <div class="card-content">
+                当前价格突破关键阻力位 68000，预计进一步上涨至 70000。建议在回调至 67800 附近入场，严格控制风险。
             </div>
-            <div class="tags mt-3">
-                <span>BTC</span>
-                <span>做多</span>
-                <span>突破</span>
+            <div class="card-details">
+                <div class="detail-item">止损: 67000</div>
+                <div class="detail-item">止盈: 70000 / 72000</div>
+            </div>
+            <div class="card-tags">
+                <span class="tag">BTC</span>
+                <span class="tag long">做多</span>
+                <span class="tag">突破</span>
+                <span class="tag">高胜率</span>
             </div>
         </div>
 
         <div class="strategy-card" data-type="short">
-            <div class="header">
-                <span class="title">ETHUSDT - 压力位做空</span>
-                <span class="time">45分钟前</span>
+            <div class="card-header">
+                <div>
+                    <div class="card-title">ETHUSDT - 压力位做空</div>
+                    <div class="card-time">45分钟前</div>
+                </div>
+                <div class="card-time">⚡ 实时</div>
             </div>
-            <p class="content">
-                ETH 触及上方强压力区 3600，出现滞涨信号，可考虑轻仓做空，目标 3500。
-            </p>
-            <div class="details">
-                <span>止损: 3650</span>
-                <span>止盈: 3500 / 3450</span>
+            <div class="card-content">
+                ETH 触及上方强压力区 3600，出现明显滞涨信号，可考虑轻仓做空，目标 3500。注意市场情绪变化。
             </div>
-            <div class="tags mt-3">
-                <span>ETH</span>
-                <span>做空</span>
-                <span>压力位</span>
+            <div class="card-details">
+                <div class="detail-item">止损: 3650</div>
+                <div class="detail-item">止盈: 3500 / 3450</div>
+            </div>
+            <div class="card-tags">
+                <span class="tag">ETH</span>
+                <span class="tag short">做空</span>
+                <span class="tag">压力位</span>
+                <span class="tag">轻仓</span>
             </div>
         </div>
 
         <div class="strategy-card" data-type="volatile">
-            <div class="header">
-                <span class="title">SOLUSDT - 区间震荡</span>
-                <span class="time">2小时前</span>
+            <div class="card-header">
+                <div>
+                    <div class="card-title">SOLUSDT - 区间震荡</div>
+                    <div class="card-time">2小时前</div>
+                </div>
+                <div class="card-time">📊 分析</div>
             </div>
-            <p class="content">
-                SOL 近期在 160-175 区间内震荡，可在区间上下轨附近高抛低吸。注意控制仓位。
-            </p>
-            <div class="details">
-                <span>区间: 160-175</span>
-                <span>风险: 中</span>
+            <div class="card-content">
+                SOL 近期在 160-175 区间内震荡，可在区间上下轨附近高抛低吸。注意控制仓位，等待突破信号。
             </div>
-            <div class="tags mt-3">
-                <span>SOL</span>
-                <span>震荡</span>
-                <span>区间交易</span>
+            <div class="card-details">
+                <div class="detail-item">区间: 160-175</div>
+                <div class="detail-item">风险等级: 中等</div>
+            </div>
+            <div class="card-tags">
+                <span class="tag">SOL</span>
+                <span class="tag">震荡</span>
+                <span class="tag">区间交易</span>
+                <span class="tag">稳健</span>
             </div>
         </div>
-         <div class="strategy-card" data-type="long">
-            <div class="header">
-                <span class="title">DOGEUSDT - 潜在拉升</span>
-                <span class="time">3小时前</span>
+
+        <div class="strategy-card" data-type="long">
+            <div class="card-header">
+                <div>
+                    <div class="card-title">DOGEUSDT - 潜在拉升</div>
+                    <div class="card-time">3小时前</div>
+                </div>
+                <div class="card-time">💎 精选</div>
             </div>
-            <p class="content">
-                DOGE 链上数据显示大额异动，配合成交量放大，可能存在潜在拉升机会。可关注 0.15 附近支撑。
-            </p>
-            <div class="details">
-                <span>关注点: 0.15</span>
-                <span>止盈: 0.165 / 0.17</span>
+            <div class="card-content">
+                DOGE 链上数据显示大额异动，配合成交量放大，可能存在潜在拉升机会。可关注 0.15 附近支撑位入场。
             </div>
-            <div class="tags mt-3">
-                <span>DOGE</span>
-                <span>做多</span>
-                <span>异动</span>
+            <div class="card-details">
+                <div class="detail-item">关注点: 0.15</div>
+                <div class="detail-item">止盈: 0.165 / 0.17</div>
+            </div>
+            <div class="card-tags">
+                <span class="tag">DOGE</span>
+                <span class="tag long">做多</span>
+                <span class="tag">异动</span>
+                <span class="tag">潜力</span>
+            </div>
+        </div>
+
+        <div class="strategy-card" data-type="scalping">
+            <div class="card-header">
+                <div>
+                    <div class="card-title">ADAUSDT - 短线机会</div>
+                    <div class="card-time">4小时前</div>
+                </div>
+                <div class="card-time">⚡ 快速</div>
+            </div>
+            <div class="card-content">
+                ADA 在 0.48-0.52 区间内快速波动，适合短线交易。建议设置较小止损，快进快出。
+            </div>
+            <div class="card-details">
+                <div class="detail-item">入场: 0.485</div>
+                <div class="detail-item">目标: 0.515</div>
+            </div>
+            <div class="card-tags">
+                <span class="tag">ADA</span>
+                <span class="tag">短线</span>
+                <span class="tag">快速</span>
+                <span class="tag">小止损</span>
             </div>
         </div>
     </div>
 
-    <nav class="ios-tab-bar">
+    <!-- 高端底部导航栏 -->
+    <div class="premium-tab-bar">
         <a href="index.html" class="tab-item">
             <i class="fas fa-home"></i>
-            <span>首页</span>
+            首页
         </a>
         <a href="strategy.html" class="tab-item active">
             <i class="fas fa-chart-line"></i>
-            <span>策略</span>
+            策略
         </a>
         <a href="monitoring.html" class="tab-item">
-            <i class="fas fa-search-dollar"></i>
-            <span>监控</span>
+            <i class="fas fa-chart-bar"></i>
+            监控
+        </a>
+        <a href="insurance.html" class="tab-item">
+            <i class="fas fa-shield-alt"></i>
+            保险
         </a>
         <a href="profile.html" class="tab-item">
-            <i class="fas fa-user-circle"></i>
-            <span>我的</span>
+            <i class="fas fa-user"></i>
+            我的
         </a>
-    </nav>
+    </div>
 
     <script>
         function filterStrategies(type) {
@@ -249,9 +576,24 @@
                 }
             });
         }
+        
+        // 添加卡片悬停效果
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.strategy-card');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-8px)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(-4px)';
+                });
+            });
+        });
+        
         // 默认显示全部
         filterStrategies('all');
     </script>
 
 </body>
-</html> 
+</html>
