@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>KOL合集 - 币圈合约助手</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #f0f2f5;
+            color: #1c1c1e;
+            padding-bottom: 80px; /* 为底部导航栏预留空间 */
+        }
+        .ios-header {
+            background-color: #f8f8f8;
+            border-bottom: 1px solid #d1d1d6;
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            font-size: 1.125rem; /* 18px */
+            font-weight: 600;
+            color: #000;
+            position: sticky; /* 吸顶效果 */
+            top: 0;
+            z-index: 100;
+        }
+        .ios-header .back-button {
+            color: #007aff;
+            text-decoration: none;
+            font-size: 1rem; /* 16px */
+            margin-right: 8px;
+        }
+        .ios-header .title {
+            flex-grow: 1;
+            text-align: center;
+            margin-left: -24px; /* 大致抵消返回按钮的宽度，使标题居中 */
+        }
+        .kol-list-container {
+            padding: 8px;
+        }
+        .kol-card {
+            background-color: #ffffff;
+            border-radius: 10px;
+            margin: 8px 0;
+            padding: 16px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            display: flex;
+            align-items: center;
+        }
+        .kol-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 12px;
+            object-fit: cover;
+        }
+        .kol-info {
+            flex-grow: 1;
+        }
+        .kol-name {
+            font-size: 1rem; /* 16px */
+            font-weight: 600;
+            color: #1c1c1e;
+            margin-bottom: 2px;
+        }
+        .kol-bio {
+            font-size: 0.85rem; /* 约13.6px */
+            color: #6c6c70;
+            margin-bottom: 4px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2; /* 最多显示两行 */
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .kol-tags span {
+            background-color: #eef7ff;
+            color: #007aff;
+            padding: 3px 6px;
+            border-radius: 6px;
+            font-size: 0.7rem; /* 11.2px */
+            margin-right: 4px;
+            font-weight: 500;
+        }
+        .follow-button {
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            background-color: #007aff;
+            color: white;
+            border: 1px solid #007aff;
+            cursor: pointer;
+            transition: background-color 0.2s, color 0.2s;
+        }
+        .follow-button.followed {
+            background-color: #e5e5ea;
+            color: #007aff;
+            border-color: #d1d1d6;
+        }
+        .ios-tab-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: #f8f8f8;
+            border-top: 1px solid #d1d1d6;
+            display: flex;
+            justify-content: space-around;
+            padding: 8px 0;
+            padding-bottom: calc(8px + env(safe-area-inset-bottom));
+        }
+        .tab-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #8e8e93;
+            text-decoration: none;
+            font-size: 0.75rem;
+        }
+        .tab-item.active {
+            color: #007aff;
+        }
+        .tab-item i {
+            font-size: 1.5rem;
+            margin-bottom: 2px;
+        }
+        .filter-tabs {
+            display: flex;
+            justify-content: space-around;
+            background-color: #ffffff;
+            padding: 10px 0;
+            border-bottom: 1px solid #e5e5ea;
+        }
+        .filter-tab {
+            padding: 6px 16px;
+            font-size: 0.9rem;
+            color: #8e8e93;
+            border-bottom: 2px solid transparent;
+            cursor: pointer;
+            font-weight: 500;
+        }
+        .filter-tab.active {
+            color: #007aff;
+            border-bottom-color: #007aff;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="ios-header">
+        <a href="index.html" class="back-button"><i class="fas fa-chevron-left"></i> 返回</a>
+        <span class="title">KOL合集</span>
+    </header>
+
+    <div class="filter-tabs">
+        <button class="filter-tab active" onclick="filterKOLs('all', this)">全部</button>
+        <button class="filter-tab" onclick="filterKOLs('crypto', this)">加密大V</button>
+        <button class="filter-tab" onclick="filterKOLs('trader', this)">实战交易员</button>
+        <button class="filter-tab" onclick="filterKOLs('analyst', this)">分析师</button>
+    </div>
+
+    <main class="kol-list-container" id="kol-list">
+        <div class="kol-card" data-category="trader analyst">
+            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cHJvZmVzc2lvbmFsJTIwd29tYW58ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=50&q=50" alt="KOL Avatar" class="kol-avatar">
+            <div class="kol-info">
+                <h3 class="kol-name">交易女王 AlphaQueen</h3>
+                <p class="kol-bio">十年实战经验，专注趋势交易和风险控制。每日分享精准点位策略，胜率高达80%。</p>
+                <div class="kol-tags">
+                    <span>趋势交易</span>
+                    <span>ETH</span>
+                    <span>高胜率</span>
+                </div>
+            </div>
+            <button class="follow-button" onclick="toggleFollow(this)">关注</button>
+        </div>
+
+        <div class="kol-card" data-category="crypto analyst">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cHJvZmVzc2lvbmFsJTIwbWFufGVufDB8fDB8fHww&auto=format&fit=crop&w=50&q=50" alt="KOL Avatar" class="kol-avatar">
+            <div class="kol-info">
+                <h3 class="kol-name">区块先知 CryptoProphet</h3>
+                <p class="kol-bio">深入研究区块链底层技术与项目基本面，挖掘早期百倍币。提供深度分析报告。</p>
+                <div class="kol-tags">
+                    <span>基本面</span>
+                    <span>价值投资</span>
+                    <span>研报</span>
+                </div>
+            </div>
+            <button class="follow-button followed" onclick="toggleFollow(this)">已关注</button>
+        </div>
+
+        <div class="kol-card" data-category="trader">
+            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8cHJvZmVzc2lvbmFsJTIwbWFufGVufDB8fDB8fHww&auto=format&fit=crop&w=50&q=50" alt="KOL Avatar" class="kol-avatar">
+            <div class="kol-info">
+                <h3 class="kol-name">短线狙击手 ScalperKing</h3>
+                <p class="kol-bio">专注15分钟和1小时级别短线操作，快进快出，追求极致复利。适合小资金博弈。</p>
+                <div class="kol-tags">
+                    <span>短线</span>
+                    <span>高频</span>
+                    <span>BTC</span>
+                </div>
+            </div>
+            <button class="follow-button" onclick="toggleFollow(this)">关注</button>
+        </div>
+        
+        <div class="kol-card" data-category="crypto">
+            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cHJvZmVzc2lvbmFsJTIwd29tYW58ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=50&q=50" alt="KOL Avatar" class="kol-avatar">
+            <div class="kol-info">
+                <h3 class="kol-name"> DeFi女巫 Luna DeFi</h3>
+                <p class="kol-bio">深耕DeFi领域，精通各类挖矿、套利策略。带你玩转去中心化金融，获取超额alpha收益。</p>
+                <div class="kol-tags">
+                    <span>DeFi</span>
+                    <span>挖矿</span>
+                    <span>空投</span>
+                </div>
+            </div>
+            <button class="follow-button" onclick="toggleFollow(this)">关注</button>
+        </div>
+
+    </main>
+
+    <nav class="ios-tab-bar">
+        <a href="index.html" class="tab-item">
+            <i class="fas fa-home"></i>
+            <span>首页</span>
+        </a>
+        <a href="strategy.html" class="tab-item">
+            <i class="fas fa-chart-line"></i>
+            <span>策略</span>
+        </a>
+        <a href="monitoring.html" class="tab-item">
+            <i class="fas fa-search-dollar"></i>
+            <span>监控</span>
+        </a>
+        <a href="profile.html" class="tab-item">
+            <i class="fas fa-user-circle"></i>
+            <span>我的</span>
+        </a>
+    </nav>
+
+    <script>
+        function toggleFollow(button) {
+            button.classList.toggle('followed');
+            if (button.classList.contains('followed')) {
+                button.textContent = '已关注';
+            } else {
+                button.textContent = '关注';
+            }
+        }
+
+        function filterKOLs(category, clickedTab) {
+            const tabs = document.querySelectorAll('.filter-tab');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            clickedTab.classList.add('active');
+
+            const kolCards = document.querySelectorAll('.kol-card');
+            kolCards.forEach(card => {
+                const cardCategories = card.dataset.category.split(' ');
+                if (category === 'all' || cardCategories.includes(category)) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+         // Initial load: show all
+        filterKOLs('all', document.querySelector('.filter-tab.active'));
+    </script>
+
+</body>
+</html> 

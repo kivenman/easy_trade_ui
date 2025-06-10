@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>早盘分析 - 币圈合约助手</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #f0f2f5;
+            color: #1c1c1e;
+            padding-bottom: 80px; /* 为底部导航栏预留空间 */
+        }
+        .ios-header {
+            background-color: #f8f8f8;
+            border-bottom: 1px solid #d1d1d6;
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            font-size: 1.125rem; /* 18px */
+            font-weight: 600;
+            color: #000;
+            position: sticky; /* 吸顶效果 */
+            top: 0;
+            z-index: 100;
+        }
+        .ios-header .back-button {
+            color: #007aff;
+            text-decoration: none;
+            font-size: 1rem; /* 16px */
+            margin-right: 8px;
+        }
+        .ios-header .title {
+            flex-grow: 1;
+            text-align: center;
+            margin-left: -24px; /* 大致抵消返回按钮的宽度，使标题居中 */
+        }
+        .analysis-segment {
+            padding: 10px 16px;
+            background-color: #ffffff;
+            border-bottom: 1px solid #e5e5ea;
+            display: flex;
+            justify-content: space-around;
+        }
+        .segment-button {
+            padding: 8px 16px;
+            border: none;
+            background: none;
+            font-size: 0.95rem;
+            color: #8e8e93;
+            font-weight: 500;
+            border-bottom: 2px solid transparent;
+            cursor: pointer;
+        }
+        .segment-button.active {
+            color: #007aff;
+            border-bottom-color: #007aff;
+        }
+        .content-section {
+            padding: 8px;
+        }
+        .article-card {
+            background-color: #ffffff;
+            border-radius: 10px;
+            margin: 8px;
+            padding: 16px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+        .article-card .category {
+            font-size: 0.75rem; /* 12px */
+            color: #007aff;
+            font-weight: 500;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+        }
+        .article-card .title {
+            font-size: 1.05rem; /* 约16.8px */
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #1c1c1e;
+        }
+        .article-card .summary {
+            font-size: 0.9rem; /* 约14.4px */
+            color: #3c3c43;
+            line-height: 1.5;
+            margin-bottom: 12px;
+        }
+        .article-card .meta {
+            font-size: 0.8rem; /* 约12.8px */
+            color: #8e8e93;
+            display: flex;
+            justify-content: space-between;
+        }
+        .article-card .meta .source {
+            font-weight: 500;
+        }
+        .ios-tab-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: #f8f8f8;
+            border-top: 1px solid #d1d1d6;
+            display: flex;
+            justify-content: space-around;
+            padding: 8px 0;
+            padding-bottom: calc(8px + env(safe-area-inset-bottom));
+        }
+        .tab-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #8e8e93;
+            text-decoration: none;
+            font-size: 0.75rem;
+        }
+        .tab-item.active {
+            color: #007aff;
+        }
+        .tab-item i {
+            font-size: 1.5rem;
+            margin-bottom: 2px;
+        }
+        /* 初始隐藏非激活内容 */
+        #news-summary, #future-trends {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="ios-header">
+        <a href="index.html" class="back-button"><i class="fas fa-chevron-left"></i> 返回</a>
+        <span class="title">早盘分析</span>
+    </header>
+
+    <div class="analysis-segment">
+        <button id="btn-trends" class="segment-button active" onclick="showSection('future-trends', this)">未来趋势</button>
+        <button id="btn-news" class="segment-button" onclick="showSection('news-summary', this)">新闻摘要</button>
+    </div>
+
+    <div id="content-area">
+        <section id="future-trends" class="content-section" style="display: block;">
+            <div class="article-card">
+                <div class="category">趋势分析</div>
+                <h3 class="title">比特币减半后市场展望</h3>
+                <p class="summary">比特币完成第四次减半后，市场普遍预期供应量减少将推动价格长期上涨。短期内可能出现波动，但长期基本面依然强劲。关注机构资金流入和宏观经济环境变化。</p>
+                <div class="meta">
+                    <span class="source">币圈观察</span>
+                    <span>2小时前</span>
+                </div>
+            </div>
+            <div class="article-card">
+                <div class="category">技术分析</div>
+                <h3 class="title">以太坊坎昆升级影响解读</h3>
+                <p class="summary">以太坊坎昆升级（Dencun）旨在通过Proto-Danksharding降低L2交易费用，提升网络可扩展性。这对L2生态发展构成重大利好，可能进一步推高ETH的需求。</p>
+                <div class="meta">
+                    <span class="source">链上研究院</span>
+                    <span>5小时前</span>
+                </div>
+            </div>
+             <div class="article-card">
+                <div class="category">宏观分析</div>
+                <h3 class="title">全球监管政策对市场影响</h3>
+                <p class="summary">近期各国对加密货币的监管政策逐渐明朗化，美国SEC对ETF的批准以及香港开放加密货币现货ETF等事件，为市场带来了更多合规资金的入场预期。但仍需警惕部分国家可能出现的严厉打压政策。</p>
+                <div class="meta">
+                    <span class="source">区块趋势</span>
+                    <span>1天前</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="news-summary" class="content-section">
+            <div class="article-card">
+                <div class="category">重要新闻</div>
+                <h3 class="title">美联储暗示年内降息可能性降低</h3>
+                <p class="summary">最新美联储会议纪要显示，多数官员认为通胀仍具粘性，对过早降息表示谨慎。此消息可能对风险资产（包括加密货币）造成短期压力。</p>
+                <div class="meta">
+                    <span class="source">华尔街快讯</span>
+                    <span>30分钟前</span>
+                </div>
+            </div>
+            <div class="article-card">
+                <div class="category">行业动态</div>
+                <h3 class="title">某知名交易所宣布上线AI相关代币</h3>
+                <p class="summary">随着AI概念的火热，多家交易所开始积极布局AI赛道代币。该交易所此次上线AI代币引发市场关注，相关代币短线出现较大涨幅。</p>
+                <div class="meta">
+                    <span class="source">CoinDesk</span>
+                    <span>1小时前</span>
+                </div>
+            </div>
+            <div class="article-card">
+                <div class="category">安全事件</div>
+                <h3 class="title">某DeFi协议遭遇闪电贷攻击</h3>
+                <p class="summary">一个新兴的DeFi协议昨日遭到黑客利用闪电贷进行的攻击，损失约百万美元。项目方表示正在积极追查并计划对受损用户进行补偿。</p>
+                <div class="meta">
+                    <span class="source">慢雾科技</span>
+                    <span>4小时前</span>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <nav class="ios-tab-bar">
+        <a href="index.html" class="tab-item">
+            <i class="fas fa-home"></i>
+            <span>首页</span>
+        </a>
+        <a href="strategy.html" class="tab-item">
+            <i class="fas fa-chart-line"></i>
+            <span>策略</span>
+        </a>
+        <a href="monitoring.html" class="tab-item">
+            <i class="fas fa-search-dollar"></i>
+            <span>监控</span>
+        </a>
+        <a href="profile.html" class="tab-item"> 
+            <i class="fas fa-user-circle"></i>
+            <span>我的</span>
+        </a>
+    </nav>
+
+    <script>
+        function showSection(sectionId, buttonElement) {
+            // 隐藏所有内容区域
+            document.getElementById('future-trends').style.display = 'none';
+            document.getElementById('news-summary').style.display = 'none';
+            
+            // 显示选定的内容区域
+            document.getElementById(sectionId).style.display = 'block';
+
+            // 更新分段控件按钮的激活状态
+            const buttons = document.querySelectorAll('.segment-button');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            buttonElement.classList.add('active');
+        }
+
+        // 默认显示未来趋势
+        document.addEventListener('DOMContentLoaded', () => {
+            showSection('future-trends', document.getElementById('btn-trends'));
+        });
+    </script>
+
+</body>
+</html> 

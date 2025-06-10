@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>我的 - 币圈合约助手</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #f0f2f5;
+            color: #1c1c1e;
+            padding-bottom: 80px; /* 为底部导航栏预留空间 */
+        }
+        .ios-header {
+            background-color: #f8f8f8;
+            border-bottom: 1px solid #d1d1d6;
+            padding: 12px 16px;
+            text-align: center;
+            font-size: 1.125rem; /* 18px */
+            font-weight: 600;
+            color: #000;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .profile-header {
+            background-color: #ffffff;
+            padding: 25px 20px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #e5e5ea;
+            margin-bottom: 12px;
+        }
+        .profile-avatar {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            margin-right: 16px;
+            object-fit: cover;
+            border: 2px solid #007aff;
+        }
+        .profile-info {
+            flex-grow: 1;
+        }
+        .profile-name {
+            font-size: 1.3rem; /* 20.8px */
+            font-weight: 600;
+            color: #1c1c1e;
+            margin-bottom: 4px;
+        }
+        .profile-id {
+            font-size: 0.9rem; /* 14.4px */
+            color: #8e8e93;
+        }
+        .profile-edit-button {
+            color: #007aff;
+            font-size: 1.5rem; /* 24px */
+            text-decoration: none;
+        }
+
+        .list-group {
+            background-color: #ffffff;
+            border-radius: 10px;
+            margin: 0 16px 12px 16px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            overflow: hidden;
+        }
+        .list-item {
+            display: flex;
+            align-items: center;
+            padding: 14px 16px;
+            border-bottom: 1px solid #eef0f2;
+            text-decoration: none;
+            color: #1c1c1e;
+            transition: background-color 0.15s ease-in-out;
+        }
+        .list-item:hover {
+            background-color: #f7f7f7;
+        }
+        .list-item:last-child {
+            border-bottom: none;
+        }
+        .list-item-icon {
+            color: #007aff;
+            font-size: 1.1rem; /* 17.6px */
+            margin-right: 15px;
+            width: 22px; /* 固定图标宽度，使其对齐 */
+            text-align: center;
+        }
+        .list-item-text {
+            flex-grow: 1;
+            font-size: 0.95rem; /* 15.2px */
+        }
+        .list-item-arrow i {
+            color: #c7c7cc; /* iOS箭头颜色 */
+            font-size: 0.9rem;
+        }
+        .logout-button-container {
+            margin: 20px 16px;
+        }
+        .logout-button {
+            width: 100%;
+            padding: 14px;
+            background-color: #ff3b30; /* iOS红色 */
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            text-align: center;
+            transition: background-color 0.2s;
+        }
+        .logout-button:hover {
+            background-color: #d92c23;
+        }
+
+        .ios-tab-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: #f8f8f8;
+            border-top: 1px solid #d1d1d6;
+            display: flex;
+            justify-content: space-around;
+            padding: 8px 0;
+            padding-bottom: calc(8px + env(safe-area-inset-bottom));
+        }
+        .tab-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #8e8e93;
+            text-decoration: none;
+            font-size: 0.75rem;
+        }
+        .tab-item.active {
+            color: #007aff;
+        }
+        .tab-item i {
+            font-size: 1.5rem;
+            margin-bottom: 2px;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="ios-header">
+        我的账户
+    </header>
+
+    <main>
+        <div class="profile-header">
+            <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8dXNlciUyMHByb2ZpbGV8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=70&q=70" alt="用户头像" class="profile-avatar">
+            <div class="profile-info">
+                <h2 class="profile-name">尊贵的用户</h2>
+                <p class="profile-id">UID: 1008611</p>
+            </div>
+            <a href="#" class="profile-edit-button">
+                <i class="fas fa-cog"></i> <!-- 设置图标替代编辑图标 -->
+            </a>
+        </div>
+
+        <div class="list-group">
+            <a href="#" class="list-item">
+                <span class="list-item-icon"><i class="fas fa-wallet"></i></span>
+                <span class="list-item-text">我的资产</span>
+                <span class="list-item-arrow"><i class="fas fa-chevron-right"></i></span>
+            </a>
+            <a href="#" class="list-item">
+                <span class="list-item-icon"><i class="fas fa-user-shield"></i></span>
+                <span class="list-item-text">安全中心</span>
+                <span class="list-item-arrow"><i class="fas fa-chevron-right"></i></span>
+            </a>
+            <a href="#" class="list-item">
+                <span class="list-item-icon"><i class="fas fa-bell"></i></span>
+                <span class="list-item-text">消息通知</span>
+                <span class="list-item-arrow"><i class="fas fa-chevron-right"></i></span>
+            </a>
+        </div>
+
+        <div class="list-group">
+            <a href="#" class="list-item">
+                <span class="list-item-icon"><i class="fas fa-question-circle"></i></span>
+                <span class="list-item-text">帮助与反馈</span>
+                <span class="list-item-arrow"><i class="fas fa-chevron-right"></i></span>
+            </a>
+            <a href="#" class="list-item">
+                <span class="list-item-icon"><i class="fas fa-info-circle"></i></span>
+                <span class="list-item-text">关于我们</span>
+                <span class="list-item-arrow"><i class="fas fa-chevron-right"></i></span>
+            </a>
+             <a href="#" class="list-item">
+                <span class="list-item-icon"><i class="fas fa-star"></i></span>
+                <span class="list-item-text">给个好评</span>
+                <span class="list-item-arrow"><i class="fas fa-chevron-right"></i></span>
+            </a>
+        </div>
+
+        <div class="logout-button-container">
+            <a href="login.html" class="logout-button">退出登录</a>
+        </div>
+
+    </main>
+
+    <nav class="ios-tab-bar">
+        <a href="index.html" class="tab-item">
+            <i class="fas fa-home"></i>
+            <span>首页</span>
+        </a>
+        <a href="strategy.html" class="tab-item">
+            <i class="fas fa-chart-line"></i>
+            <span>策略</span>
+        </a>
+        <a href="monitoring.html" class="tab-item">
+            <i class="fas fa-search-dollar"></i>
+            <span>监控</span>
+        </a>
+        <a href="profile.html" class="tab-item active">
+            <i class="fas fa-user-circle"></i>
+            <span>我的</span>
+        </a>
+    </nav>
+
+</body>
+</html> 

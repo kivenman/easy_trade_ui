@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>开仓建议 - 币圈合约助手</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #f0f2f5;
+            color: #1c1c1e;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            margin: 0;
+        }
+        .ios-header {
+            background-color: #f8f8f8;
+            border-bottom: 1px solid #d1d1d6;
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            font-size: 1.125rem; /* 18px */
+            font-weight: 600;
+            color: #000;
+            position: fixed; /* 固定头部 */
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+        .ios-header .back-button {
+            color: #007aff;
+            text-decoration: none;
+            font-size: 1rem; /* 16px */
+            margin-right: 8px;
+        }
+        .ios-header .title {
+            flex-grow: 1;
+            text-align: center;
+             margin-left: -24px; /* 大致抵消返回按钮的宽度，使标题居中 */
+        }
+        .chat-container {
+            flex-grow: 1;
+            padding: 70px 16px 80px 16px; /* 顶部和底部留出空间给header和input-bar */
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+        .message {
+            max-width: 80%;
+            padding: 10px 15px;
+            border-radius: 18px;
+            margin-bottom: 10px;
+            line-height: 1.4;
+            font-size: 0.95rem; /* 15.2px */
+        }
+        .message.user {
+            background-color: #007aff;
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 4px;
+        }
+        .message.bot {
+            background-color: #e5e5ea; /* iOS信息气泡灰色 */
+            color: #1c1c1e;
+            align-self: flex-start;
+            border-bottom-left-radius: 4px;
+        }
+        .message.bot .loading-dots span {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background-color: #8e8e93;
+            border-radius: 50%;
+            margin: 0 2px;
+            animation: bounce 1.4s infinite ease-in-out both;
+        }
+        .message.bot .loading-dots span:nth-child(1) { animation-delay: -0.32s; }
+        .message.bot .loading-dots span:nth-child(2) { animation-delay: -0.16s; }
+        @keyframes bounce {
+            0%, 80%, 100% { transform: scale(0); }
+            40% { transform: scale(1.0); }
+        }
+        .input-bar {
+            display: flex;
+            padding: 8px 12px;
+            background-color: #f8f8f8;
+            border-top: 1px solid #d1d1d6;
+            position: fixed; /* 固定输入栏 */
+            bottom: 50px; /* 为iOS导航栏预留空间 */
+            left: 0;
+            right: 0;
+            padding-bottom: calc(8px + env(safe-area-inset-bottom)); /* 适配iPhone X等底部安全区域 */
+        }
+        .input-bar input {
+            flex-grow: 1;
+            padding: 10px 15px;
+            border: 1px solid #d1d1d6;
+            border-radius: 20px;
+            font-size: 1rem;
+            margin-right: 8px;
+            outline: none;
+        }
+        .input-bar button {
+            background-color: #007aff;
+            color: white;
+            border: none;
+            padding: 0 18px;
+            border-radius: 20px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+        }
+         .ios-tab-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height:50px; /* 固定高度 */
+            background-color: #f8f8f8;
+            border-top: 1px solid #d1d1d6;
+            display: flex;
+            justify-content: space-around;
+            /* padding: 8px 0; */ /* 移除上下padding，由固定高度控制 */
+            padding-bottom: env(safe-area-inset-bottom); /* 仅在底部添加安全区域padding */
+            align-items: center; /* 垂直居中 */
+        }
+        .tab-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #8e8e93;
+            text-decoration: none;
+            font-size: 0.75rem;
+        }
+        .tab-item.active {
+            color: #007aff;
+        }
+        .tab-item i {
+            font-size: 1.5rem;
+            margin-bottom: 2px;
+        }
+        .quick-replies {
+            padding: 5px 16px 10px 16px;
+            background-color: #f0f2f5; /* 与聊天背景一致 */
+            display: flex;
+            flex-wrap: wrap; /* 换行显示 */
+            gap: 8px;
+            position: fixed;
+            bottom: calc(50px + env(safe-area-inset-bottom) + 48px); /* 位于输入栏上方 */
+            left:0;
+            right:0;
+            border-bottom: 1px solid #e5e5ea;
+        }
+        .quick-reply-btn {
+            background-color: #ffffff;
+            color: #007aff;
+            border: 1px solid #007aff;
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="ios-header">
+        <a href="index.html" class="back-button"><i class="fas fa-chevron-left"></i> 返回</a>
+        <span class="title">开仓建议</span>
+    </header>
+
+    <div class="chat-container" id="chat-container">
+        <div class="message bot">
+            你好！我是您的AI开仓助手，有什么可以帮您？例如，您可以问我 "BTC现在适合开多吗？" 或者 "ETH的支撑位在哪？"
+        </div>
+    </div>
+
+    <div class="quick-replies" id="quick-replies">
+        <button class="quick-reply-btn" onclick="sendQuickReply('BTC现在趋势如何？')">BTC趋势?</button>
+        <button class="quick-reply-btn" onclick="sendQuickReply('ETH支撑位和压力位？')">ETH支撑/压力?</button>
+        <button class="quick-reply-btn" onclick="sendQuickReply('推荐一个短线币种')">短线推荐?</button>
+    </div>
+
+    <div class="input-bar">
+        <input type="text" id="message-input" placeholder="输入您的问题...">
+        <button onclick="sendMessage()">发送</button>
+    </div>
+
+    <nav class="ios-tab-bar">
+        <a href="index.html" class="tab-item">
+            <i class="fas fa-home"></i>
+            <span>首页</span>
+        </a>
+        <a href="strategy.html" class="tab-item">
+            <i class="fas fa-chart-line"></i>
+            <span>策略</span>
+        </a>
+        <a href="monitoring.html" class="tab-item">
+            <i class="fas fa-search-dollar"></i>
+            <span>监控</span>
+        </a>
+        <a href="profile.html" class="tab-item">
+            <i class="fas fa-user-circle"></i>
+            <span>我的</span>
+        </a>
+    </nav>
+
+    <script>
+        const chatContainer = document.getElementById('chat-container');
+        const messageInput = document.getElementById('message-input');
+        const quickRepliesContainer = document.getElementById('quick-replies');
+
+        function addMessage(text, sender) {
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('message', sender);
+            messageDiv.textContent = text;
+            chatContainer.appendChild(messageDiv);
+            chatContainer.scrollTop = chatContainer.scrollHeight; // 滚动到底部
+        }
+
+        function addLoadingMessage() {
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('message', 'bot');
+            messageDiv.innerHTML = '<div class="loading-dots"><span></span><span></span><span></span></div>';
+            chatContainer.appendChild(messageDiv);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+            return messageDiv;
+        }
+
+        function removeMessage(messageElement) {
+            if (messageElement) {
+                chatContainer.removeChild(messageElement);
+            }
+        }
+
+        function sendMessage() {
+            const text = messageInput.value.trim();
+            if (text === '') return;
+
+            addMessage(text, 'user');
+            messageInput.value = '';
+            quickRepliesContainer.style.display = 'none'; // 发送消息后隐藏快捷回复
+
+            const loadingMessage = addLoadingMessage();
+
+            // 模拟机器人回复
+            setTimeout(() => {
+                removeMessage(loadingMessage);
+                let botReply = "抱歉，我暂时无法回答这个问题。";
+                if (text.includes("BTC") && text.includes("趋势")) {
+                    botReply = "BTC当前处于震荡行情，建议关注67000美元的支撑位和69000美元的压力位。短期内突破方向不明朗，请注意风险控制。";
+                } else if (text.includes("ETH") && (text.includes("支撑") || text.includes("压力"))) {
+                    botReply = "ETH的主要支撑位在3550美元附近，上方压力位在3680美元和3750美元。如果跌破3550，可能会进一步下探3400。";
+                } else if (text.includes("推荐") && (text.includes("短线") || text.includes("币种"))) {
+                    botReply = "近期可以关注SOL和AVAX，它们在小级别图表上显示出一些积极信号。但请记住，这不构成投资建议，请自行判断风险。";
+                } else if (text.toLowerCase().includes("你好") || text.toLowerCase().includes("hello")){
+                    botReply = "你好！很高兴为您服务。有什么我可以帮忙分析的吗？"
+                }
+                addMessage(botReply, 'bot');
+                // 重新显示快捷回复（如果需要）
+                // quickRepliesContainer.style.display = 'flex';
+            }, 1500 + Math.random() * 1000);
+        }
+
+        function sendQuickReply(text) {
+            messageInput.value = text; // 将快捷回复内容放入输入框
+            sendMessage(); // 调用发送函数
+        }
+
+        messageInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+        
+        // 页面加载时，聊天区域滚动到底部
+        window.onload = () => {
+             chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+    </script>
+
+</body>
+</html> 

@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>技术支持 - 币圈合约助手</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #f0f2f5;
+            color: #1c1c1e;
+            padding-bottom: 80px; /* 为底部导航栏预留空间 */
+        }
+        .ios-header {
+            background-color: #f8f8f8;
+            border-bottom: 1px solid #d1d1d6;
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            font-size: 1.125rem; /* 18px */
+            font-weight: 600;
+            color: #000;
+            position: sticky; /* 吸顶效果 */
+            top: 0;
+            z-index: 100;
+        }
+        .ios-header .back-button {
+            color: #007aff;
+            text-decoration: none;
+            font-size: 1rem; /* 16px */
+            margin-right: 8px;
+        }
+        .ios-header .title {
+            flex-grow: 1;
+            text-align: center;
+            margin-left: -24px; /* 大致抵消返回按钮的宽度，使标题居中 */
+        }
+        .search-bar-container {
+            padding: 12px 16px;
+            background-color: #f0f2f5; /* 与body背景色一致 */
+        }
+        .search-bar {
+            display: flex;
+            align-items: center;
+            background-color: #e0e0e5; /* iOS搜索框灰色 */
+            border-radius: 10px;
+            padding: 8px 12px;
+        }
+        .search-bar i {
+            color: #8e8e93;
+            margin-right: 6px;
+        }
+        .search-bar input {
+            flex-grow: 1;
+            background: none;
+            border: none;
+            outline: none;
+            font-size: 1rem;
+            color: #1c1c1e;
+        }
+        .search-bar input::placeholder {
+            color: #8e8e93;
+        }
+        .course-category {
+            margin: 16px;
+        }
+        .category-title {
+            font-size: 1.2rem; /* 约19.2px */
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #1c1c1e;
+            padding-left: 8px; /* 与列表项对齐 */
+        }
+        .course-list {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+        }
+        .course-item {
+            padding: 14px 16px;
+            border-bottom: 1px solid #eef0f2;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-decoration: none;
+            color: #1c1c1e;
+            transition: background-color 0.15s ease-in-out;
+        }
+        .course-item:hover {
+            background-color: #f7f7f7;
+        }
+        .course-item:last-child {
+            border-bottom: none;
+        }
+        .course-item .course-name {
+            font-size: 0.95rem; /* 15.2px */
+            font-weight: 500;
+        }
+        .course-item .arrow i {
+            color: #c7c7cc; /* iOS箭头颜色 */
+            font-size: 0.9rem;
+        }
+        .ios-tab-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: #f8f8f8;
+            border-top: 1px solid #d1d1d6;
+            display: flex;
+            justify-content: space-around;
+            padding: 8px 0;
+            padding-bottom: calc(8px + env(safe-area-inset-bottom));
+        }
+        .tab-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #8e8e93;
+            text-decoration: none;
+            font-size: 0.75rem;
+        }
+        .tab-item.active {
+            color: #007aff;
+        }
+        .tab-item i {
+            font-size: 1.5rem;
+            margin-bottom: 2px;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="ios-header">
+        <a href="index.html" class="back-button"><i class="fas fa-chevron-left"></i> 返回</a>
+        <span class="title">技术支持</span>
+    </header>
+
+    <div class="search-bar-container">
+        <div class="search-bar">
+            <i class="fas fa-search"></i>
+            <input type="text" placeholder="搜索课程或问题">
+        </div>
+    </div>
+
+    <main>
+        <div class="course-category">
+            <h2 class="category-title">新手入门</h2>
+            <div class="course-list">
+                <a href="#" class="course-item">
+                    <span class="course-name">什么是区块链？</span>
+                    <span class="arrow"><i class="fas fa-chevron-right"></i></span>
+                </a>
+                <a href="#" class="course-item">
+                    <span class="course-name">什么是加密货币？</span>
+                    <span class="arrow"><i class="fas fa-chevron-right"></i></span>
+                </a>
+                <a href="#" class="course-item">
+                    <span class="course-name">如何购买第一笔加密货币？</span>
+                    <span class="arrow"><i class="fas fa-chevron-right"></i></span>
+                </a>
+            </div>
+        </div>
+
+        <div class="course-category">
+            <h2 class="category-title">合约交易基础</h2>
+            <div class="course-list">
+                <a href="#" class="course-item">
+                    <span class="course-name">什么是期货合约？</span>
+                    <span class="arrow"><i class="fas fa-chevron-right"></i></span>
+                </a>
+                <a href="#" class="course-item">
+                    <span class="course-name">保证金与杠杆详解</span>
+                    <span class="arrow"><i class="fas fa-chevron-right"></i></span>
+                </a>
+                <a href="#" class="course-item">
+                    <span class="course-name">开仓、平仓与止盈止损</span>
+                    <span class="arrow"><i class="fas fa-chevron-right"></i></span>
+                </a>
+                <a href="#" class="course-item">
+                    <span class="course-name">资金费率是什么？</span>
+                    <span class="arrow"><i class="fas fa-chevron-right"></i></span>
+                </a>
+            </div>
+        </div>
+
+        <div class="course-category">
+            <h2 class="category-title">风险管理</h2>
+            <div class="course-list">
+                <a href="#" class="course-item">
+                    <span class="course-name">仓位管理技巧</span>
+                    <span class="arrow"><i class="fas fa-chevron-right"></i></span>
+                </a>
+                <a href="#" class="course-item">
+                    <span class="course-name">如何避免爆仓？</span>
+                    <span class="arrow"><i class="fas fa-chevron-right"></i></span>
+                </a>
+                <a href="#" class="course-item">
+                    <span class="course-name">交易心理学初探</span>
+                    <span class="arrow"><i class="fas fa-chevron-right"></i></span>
+                </a>
+            </div>
+        </div>
+         <div class="course-category">
+            <h2 class="category-title">常见问题 (FAQ)</h2>
+            <div class="course-list">
+                <a href="#" class="course-item">
+                    <span class="course-name">充提币未到账怎么办？</span>
+                    <span class="arrow"><i class="fas fa-chevron-right"></i></span>
+                </a>
+                <a href="#" class="course-item">
+                    <span class="course-name">忘记交易密码如何处理？</span>
+                    <span class="arrow"><i class="fas fa-chevron-right"></i></span>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <nav class="ios-tab-bar">
+        <a href="index.html" class="tab-item">
+            <i class="fas fa-home"></i>
+            <span>首页</span>
+        </a>
+        <a href="strategy.html" class="tab-item">
+            <i class="fas fa-chart-line"></i>
+            <span>策略</span>
+        </a>
+        <a href="monitoring.html" class="tab-item">
+            <i class="fas fa-search-dollar"></i>
+            <span>监控</span>
+        </a>
+        <a href="profile.html" class="tab-item">
+            <i class="fas fa-user-circle"></i>
+            <span>我的</span>
+        </a>
+    </nav>
+
+    <script>
+        // 可选: 为搜索框添加JavaScript交互
+        const searchInput = document.querySelector('.search-bar input');
+        searchInput.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            const courseItems = document.querySelectorAll('.course-item');
+            courseItems.forEach(item => {
+                const courseName = item.querySelector('.course-name').textContent.toLowerCase();
+                if (courseName.includes(searchTerm)) {
+                    item.style.display = 'flex';
+                    // 确保父级category可见
+                    item.closest('.course-category').style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+
+            // 如果一个分类下的所有课程都被隐藏，则隐藏该分类标题
+            const categories = document.querySelectorAll('.course-category');
+            categories.forEach(category => {
+                const visibleItems = category.querySelectorAll('.course-item[style*="display: flex"]');
+                if (visibleItems.length === 0 && searchTerm !== '') { // 仅当搜索词不为空时隐藏
+                    category.style.display = 'none';
+                } else {
+                    category.style.display = 'block';
+                }
+            });
+        });
+    </script>
+
+</body>
+</html> 

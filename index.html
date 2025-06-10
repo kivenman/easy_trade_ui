@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>币圈合约助手</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #f0f2f5; /* 仿iOS浅色背景 */
+            color: #1c1c1e; /* 仿iOS深色文字 */
+        }
+        .ios-header {
+            background-color: #f8f8f8; /* 仿iOS导航栏颜色 */
+            border-bottom: 1px solid #d1d1d6; /* 仿iOS导航栏底部分割线 */
+            padding: 12px 16px;
+            text-align: center;
+            font-size: 1.125rem; /* 18px */
+            font-weight: 600;
+            color: #000;
+        }
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            padding: 16px;
+        }
+        .card {
+            background-color: #ffffff; /* 白色卡片 */
+            border-radius: 12px; /* iOS风格圆角 */
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* 轻微阴影 */
+            transition: transform 0.2s ease-in-out;
+            text-decoration: none;
+            color: inherit; /* 继承文字颜色 */
+        }
+        .card:hover {
+            transform: translateY(-4px); /* 悬浮效果 */
+        }
+        .card i {
+            font-size: 2.5rem; /* 40px */
+            margin-bottom: 12px;
+            color: #007aff; /* iOS 主题蓝色 */
+        }
+        .card-title {
+            font-size: 1rem; /* 16px */
+            font-weight: 500;
+            color: #1c1c1e;
+        }
+        .ios-tab-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: #f8f8f8;
+            border-top: 1px solid #d1d1d6;
+            display: flex;
+            justify-content: space-around;
+            padding: 8px 0;
+            padding-bottom: calc(8px + env(safe-area-inset-bottom)); /* 适配iPhone X等底部安全区域 */
+        }
+        .tab-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #8e8e93; /* iOS未选中标签颜色 */
+            text-decoration: none;
+            font-size: 0.75rem; /* 12px */
+        }
+        .tab-item.active {
+            color: #007aff; /* iOS选中标签颜色 */
+        }
+        .tab-item i {
+            font-size: 1.5rem; /* 24px */
+            margin-bottom: 2px;
+        }
+    </style>
+</head>
+<body class="pb-20">
+
+    <header class="ios-header">
+        币圈合约助手
+    </header>
+
+    <main class="grid-container">
+        <a href="strategy.html" class="card">
+            <i class="fas fa-chart-line"></i>
+            <div class="card-title">策略分享</div>
+        </a>
+        <a href="advice.html" class="card">
+            <i class="fas fa-robot"></i>
+            <div class="card-title">开仓建议</div>
+        </a>
+        <a href="analysis.html" class="card">
+            <i class="fas fa-newspaper"></i>
+            <div class="card-title">早盘分析</div>
+        </a>
+        <a href="monitoring.html" class="card">
+            <i class="fas fa-search-dollar"></i>
+            <div class="card-title">数据监控</div>
+        </a>
+        <a href="support.html" class="card">
+            <i class="fas fa-book-open"></i>
+            <div class="card-title">技术支持</div>
+        </a>
+        <a href="kol.html" class="card">
+            <i class="fas fa-users"></i>
+            <div class="card-title">KOL合集</div>
+        </a>
+    </main>
+
+    <nav class="ios-tab-bar">
+        <a href="index.html" class="tab-item active">
+            <i class="fas fa-home"></i>
+            <span>首页</span>
+        </a>
+        <a href="strategy.html" class="tab-item">
+            <i class="fas fa-chart-line"></i>
+            <span>策略</span>
+        </a>
+        <a href="monitoring.html" class="tab-item">
+            <i class="fas fa-search-dollar"></i>
+            <span>监控</span>
+        </a>
+        <a href="profile.html" class="tab-item">
+            <i class="fas fa-user-circle"></i>
+            <span>我的</span>
+        </a>
+    </nav>
+
+</body>
+</html> 
