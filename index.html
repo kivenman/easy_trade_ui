@@ -154,6 +154,58 @@
             margin-bottom: var(--space-xl);
         }
         
+        .feature-card.featured {
+            grid-column: span 2;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            border: 2px solid rgba(102, 126, 234, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-card.featured::before {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            height: 4px;
+        }
+        
+        .feature-card.featured .feature-icon {
+            width: 56px;
+            height: 56px;
+            margin-bottom: var(--space-md);
+        }
+        
+        .feature-card.featured .feature-icon i {
+            font-size: 1.5rem;
+        }
+        
+        .feature-card.featured .feature-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: var(--space-xs);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .feature-card.featured .feature-desc {
+            font-size: 0.85rem;
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+        
+        .featured-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: linear-gradient(135deg, #f6ad55 0%, #ed8936 100%);
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 4px 8px;
+            border-radius: 12px;
+            box-shadow: 0 2px 4px rgba(246, 173, 85, 0.3);
+        }
+        
         .feature-card {
             background: var(--bg-card);
             border-radius: var(--radius-md);
@@ -282,12 +334,34 @@
         /* 响应式设计 */
         @media (max-width: 768px) {
             .features-grid {
-                grid-template-columns: repeat(3, 1fr);
+                grid-template-columns: repeat(2, 1fr);
                 gap: var(--space-sm);
             }
             
             .feature-card {
                 padding: var(--space-sm);
+            }
+            
+            .feature-card.featured {
+                grid-column: span 2;
+                padding: var(--space-md);
+            }
+            
+            .feature-card.featured .feature-icon {
+                width: 48px;
+                height: 48px;
+            }
+            
+            .feature-card.featured .feature-icon i {
+                font-size: 1.3rem;
+            }
+            
+            .feature-card.featured .feature-title {
+                font-size: 1rem;
+            }
+            
+            .feature-card.featured .feature-desc {
+                font-size: 0.8rem;
             }
             
             .feature-icon {
@@ -390,13 +464,16 @@
     <!-- 主功能区域 -->
     <div class="main-content">
         <div class="features-grid">
-            <!-- 合约保跟单 -->
-            <a href="insurance.html" class="feature-card">
+            <!-- 合约保跟单 - 核心功能 -->
+            <a href="insurance.html" class="feature-card featured">
+                <div class="featured-badge">
+                    <i class="fas fa-star"></i> 全新推出
+                </div>
                 <div class="feature-icon">
                     <i class="fas fa-shield-alt"></i>
                 </div>
                 <div class="feature-title">合约保跟单</div>
-                <div class="feature-desc">亏损赔付保障服务</div>
+                <div class="feature-desc">专业亏损赔付保障服务 · 让交易更安心</div>
             </a>
             <!-- 策略分享 -->
             <a href="strategy.html" class="feature-card">
