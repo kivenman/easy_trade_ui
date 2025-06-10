@@ -114,34 +114,47 @@
             font-weight: 500;
             cursor: pointer;
         }
-         .ios-tab-bar {
+        .premium-tab-bar {
             position: fixed;
             bottom: 0;
             left: 0;
             right: 0;
-            height:50px; /* 固定高度 */
-            background-color: #f8f8f8;
-            border-top: 1px solid #d1d1d6;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.95) 0%, rgba(118, 75, 162, 0.95) 100%);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
             display: flex;
             justify-content: space-around;
-            /* padding: 8px 0; */ /* 移除上下padding，由固定高度控制 */
-            padding-bottom: env(safe-area-inset-bottom); /* 仅在底部添加安全区域padding */
-            align-items: center; /* 垂直居中 */
+            padding: 12px 0;
+            padding-bottom: calc(12px + env(safe-area-inset-bottom));
+            z-index: 1000;
         }
         .tab-item {
             display: flex;
             flex-direction: column;
             align-items: center;
-            color: #8e8e93;
+            color: rgba(255, 255, 255, 0.7);
             text-decoration: none;
             font-size: 0.75rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 4px 8px;
+            border-radius: 8px;
+        }
+        .tab-item:hover {
+            color: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.1);
         }
         .tab-item.active {
-            color: #007aff;
+            color: #ffd700;
+            background: rgba(255, 215, 0, 0.1);
         }
         .tab-item i {
-            font-size: 1.5rem;
-            margin-bottom: 2px;
+            font-size: 1.25rem;
+            margin-bottom: 4px;
+            transition: transform 0.3s ease;
+        }
+        .tab-item:hover i {
+            transform: translateY(-2px);
         }
         .quick-replies {
             padding: 5px 16px 10px 16px;
@@ -190,7 +203,7 @@
         <button onclick="sendMessage()">发送</button>
     </div>
 
-    <nav class="ios-tab-bar">
+    <nav class="premium-tab-bar">
         <a href="index.html" class="tab-item">
             <i class="fas fa-home"></i>
             <span>首页</span>
@@ -200,8 +213,12 @@
             <span>策略</span>
         </a>
         <a href="monitoring.html" class="tab-item">
-            <i class="fas fa-search-dollar"></i>
+            <i class="fas fa-chart-bar"></i>
             <span>监控</span>
+        </a>
+        <a href="insurance.html" class="tab-item active">
+            <i class="fas fa-shield-alt"></i>
+            <span>保险</span>
         </a>
         <a href="profile.html" class="tab-item">
             <i class="fas fa-user-circle"></i>
@@ -284,4 +301,4 @@
     </script>
 
 </body>
-</html> 
+</html>

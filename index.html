@@ -141,8 +141,8 @@
         }
         
         .main-content {
-            padding: var(--space-xl) var(--space-lg);
-            margin-top: -40px;
+            padding: var(--space-lg) var(--space-lg);
+            margin-top: -30px;
             position: relative;
             z-index: 3;
         }
@@ -150,14 +150,14 @@
         .features-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: var(--space-lg);
-            margin-bottom: var(--space-2xl);
+            gap: var(--space-md);
+            margin-bottom: var(--space-xl);
         }
         
         .feature-card {
             background: var(--bg-card);
-            border-radius: var(--radius-lg);
-            padding: var(--space-xl);
+            border-radius: var(--radius-md);
+            padding: var(--space-md);
             text-align: center;
             text-decoration: none;
             color: var(--text-primary);
@@ -191,14 +191,14 @@
         }
         
         .feature-icon {
-            width: 56px;
-            height: 56px;
+            width: 44px;
+            height: 44px;
             background: var(--secondary-gradient);
-            border-radius: var(--radius-md);
+            border-radius: var(--radius-sm);
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto var(--space-md);
+            margin: 0 auto var(--space-sm);
             position: relative;
         }
         
@@ -207,28 +207,28 @@
             position: absolute;
             inset: -2px;
             background: var(--secondary-gradient);
-            border-radius: var(--radius-md);
+            border-radius: var(--radius-sm);
             z-index: -1;
             opacity: 0.2;
-            filter: blur(8px);
+            filter: blur(6px);
         }
         
         .feature-icon i {
-            font-size: 1.5rem;
+            font-size: 1.25rem;
             color: white;
         }
         
         .feature-title {
-            font-size: 1rem;
+            font-size: 0.9rem;
             font-weight: 600;
-            margin-bottom: var(--space-xs);
+            margin-bottom: 2px;
             color: var(--text-primary);
         }
         
         .feature-desc {
-            font-size: 0.875rem;
+            font-size: 0.75rem;
             color: var(--text-secondary);
-            line-height: 1.5;
+            line-height: 1.4;
         }
         
         .premium-tab-bar {
@@ -280,14 +280,34 @@
         }
         
         /* 响应式设计 */
-        @media (max-width: 480px) {
+        @media (max-width: 768px) {
             .features-grid {
-                grid-template-columns: 1fr;
-                gap: var(--space-md);
+                grid-template-columns: repeat(3, 1fr);
+                gap: var(--space-sm);
             }
             
             .feature-card {
-                padding: var(--space-lg);
+                padding: var(--space-sm);
+            }
+            
+            .feature-icon {
+                width: 36px;
+                height: 36px;
+                margin-bottom: 4px;
+            }
+            
+            .feature-icon i {
+                font-size: 1rem;
+            }
+            
+            .feature-title {
+                font-size: 0.8rem;
+                margin-bottom: 0;
+            }
+            
+            .feature-desc {
+                font-size: 0.7rem;
+                line-height: 1.2;
             }
             
             .app-title {
@@ -297,6 +317,22 @@
             .trust-indicators {
                 flex-direction: column;
                 gap: var(--space-sm);
+            }
+            
+            .premium-header {
+                padding: var(--space-md) var(--space-md) var(--space-lg);
+            }
+            
+            .main-content {
+                margin-top: -20px;
+                padding: var(--space-md) var(--space-sm);
+            }
+        }
+        
+        @media (max-width: 360px) {
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 8px;
             }
         }
         
